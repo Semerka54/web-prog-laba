@@ -1,0 +1,31 @@
+body {
+    background-color: lightblue;
+    color: maroon;
+    font-family: Arial;
+    margin: 0px;
+}
+
+header {
+    background-color: rgb(73, 68, 94);
+    color: rgb(201, 111, 163);
+    font-family: Arial;
+    margin: 0px;
+}
+
+footer {
+    background-color: rgb(183, 209, 90);
+    color: rgb(52, 13, 226);
+    font-family: Arial;
+    margin: 0px;
+}
+
+main {
+    background-color: rgb(203, 199, 206);
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none !important;
+}

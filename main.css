@@ -13,17 +13,23 @@ header {
 }
 
 footer {
-    background-color: rgb(183, 209, 90);
-    color: rgb(52, 13, 226);
-    font-family: Arial;
-    margin: 0px;
+    background-color: black; 
+    color: lightgreen; 
+    padding: 20px; 
+    font-size: italic; 
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 main {
-    background-color: rgb(203, 199, 206);
-    color: rgb(0, 0, 0);
-    font-family: Arial;
-    margin: 0px;
+    background-color: rgb(16, 235, 216);
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 20px;
+    margin: 0 0 45px;
 }
 
 a {
@@ -76,4 +82,3 @@ div.menu:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
     border-color: #34495e; 
 }
-

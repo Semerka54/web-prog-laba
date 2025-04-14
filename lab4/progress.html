@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 4</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .progress-container {
+            background-color: #f0f8ff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            width: 400px;
+        }
+
+        .progress-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #4a148c;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            border: 1px solid #aaa;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #7b1fa2, #512da8);
+        }
+
+        .progress-button {
+            background-color: #4a148c;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            user-select: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .progress-button:hover {
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .progress-button:active {
+            box-shadow: none;
+        }
+
+        .progress-container:has(.progress-button:active) .progress-fill {
+            animation: fill 5s linear forwards;
+        }
+
+        @keyframes fill {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+        <hr>
+    </header>
+
+    <main>
+        <div class="progress-container">
+            <div class="progress-title">Степень прогресса</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-button">Нажмите и удерживайте</div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+
+</body>
+</html>

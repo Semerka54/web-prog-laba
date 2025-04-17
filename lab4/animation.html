@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Богданов Семён Андреевич. Лабораторная 4</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16(1).png">
+        <link rel="icon" href="../favicon-32x32(1).png">
+        <style>
+            body {
+                overflow: hidden;
+            }
+            .tag-cloud {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                margin: 0 auto;
+                font-family: Arial, sans-serif;
+            }
+
+            .tag {
+                position: absolute;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                cursor: default;
+                transform-origin: center;
+                transition: transform 0.3s ease;
+                animation-play-state: running;
+            }
+
+            .tag:hover {
+                animation-play-state: paused !important;
+                transform: scale(1.6) rotate(0deg) !important;
+                z-index: 999;
+                text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            }
+
+            @keyframes float1 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(20px, 10px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float2 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(-15px, 15px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float3 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(40px, -80px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float4 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(-60px, -20px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float5 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(5px, 25px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float6 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(45px, -10px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float7 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(15px, 35px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float8 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(-20px, 70px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float9 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(34px, 10px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float10 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(14px, -12px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float11 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(-5px, -25px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float12 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(45px, -12px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float13 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(105px, -25px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float14 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(-55px, 25px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float15 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(20px, 60px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            @keyframes float16 {
+                0% { transform: translate(0, 0); }
+                50% { transform: translate(20px, -60px); }
+                100% { transform: translate(0, 0); }
+            }
+
+            .tag:nth-child(1)  { animation: float1 6s infinite ease-in-out; }
+            .tag:nth-child(2)  { animation: float2 8s infinite ease-in-out; }
+            .tag:nth-child(3)  { animation: float3 7s infinite ease-in-out; }
+            .tag:nth-child(4)  { animation: float4 9s infinite ease-in-out; }
+            .tag:nth-child(5)  { animation: float5 5s infinite ease-in-out; }
+            .tag:nth-child(6)  { animation: float6 7s infinite ease-in-out; }
+            .tag:nth-child(7)  { animation: float7 6s infinite ease-in-out; }
+            .tag:nth-child(8)  { animation: float8 8s infinite ease-in-out; }
+            .tag:nth-child(9)  { animation: float9 5s infinite ease-in-out; }
+            .tag:nth-child(10) { animation: float10 6s infinite ease-in-out; }
+            .tag:nth-child(11) { animation: float11 9s infinite ease-in-out; }
+            .tag:nth-child(12) { animation: float12 10s infinite ease-in-out; }
+            .tag:nth-child(13) { animation: float13 7s infinite ease-in-out; }
+            .tag:nth-child(14) { animation: float14 8s infinite ease-in-out; }
+            .tag:nth-child(15) { animation: float15 6s infinite ease-in-out; }
+            .tag:nth-child(16) { animation: float16 7s infinite ease-in-out; }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 4
+            <hr>
+        </header>
+        
+        <main>
+            <div class="tag-cloud">
+                <span class="tag" style="top: 5%; left: 10%; color: #ff4d4d; transform: rotate(-10deg); font-size: 40px;">color</span>
+                <span class="tag" style="top: 8%; left: 25%; color: #ff9933; transform: rotate(5deg); font-size: 15px;">background-color</span>
+                <span class="tag" style="top: 12%; left: 15%; color: #33cc33; transform: rotate(-8deg); font-size: 55px">opacity</span>
+                <span class="tag" style="top: 13%; left: 28%; color: #cc33ff; transform: rotate(11deg); font-size: 28px">rgba()</span>
+                <span class="tag" style="top: 18%; left: 30%; color: #4d94ff; transform: rotate(-5deg); font-size: 35px">hex</span>
+                <span class="tag" style="top: 20%; left: 32%; color: #ff6600; transform: rotate(7deg); font-size: 40px">hsl()</span>
+                <span class="tag" style="top: 30%; left: 30%; color: #e60073; transform: rotate(-9deg); font-size: 37px">hsla()</span>
+                <span class="tag" style="top: 34%; left: 32%; color: #e2df0e; transform: rotate(10deg); font-size: 29px">currentColor</span>
+                <span class="tag" style="top: 40%; left: 40%; color: #996633; transform: rotate(-12deg); font-size: 10px">transparent</span>
+                <span class="tag" style="top: 45%; left: 45%; color: #cc0066; transform: rotate(8deg); font-size: 23px">inherit</span>
+                <span class="tag" style="top: 48%; left: 50%; color: #1ccc7a; transform: rotate(-6deg); font-size: 41px">initial</span>
+                <span class="tag" style="top: 52%; left: 55%; color: #6600cc; transform: rotate(6deg); font-size: 45px">var()</span>
+                <span class="tag" style="top: 53%; left: 50%; color: #b10c66; transform: rotate(-4deg); font-size: 16px">rebeccapurple</span>
+                <span class="tag" style="top: 20%; left: 70%; color: #ffcc00; transform: rotate(7deg); font-size: 17px">lighten()</span>
+                <span class="tag" style="top: 20%; left: 75%; color: #3366ff; transform: rotate(-10deg); font-size: 18px">darken()</span>
+                <span class="tag" style="top: 20%; left: 80%; color: #339966; transform: rotate(9deg); font-size: 19px">mix-blend-mode</span>
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+        </footer>
+    </body>
+</html>

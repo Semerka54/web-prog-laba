@@ -18,7 +18,45 @@
                 let result = a + b;
                 alert('Сумма ' +a+ ' и '+b+ ' равна '  + result);
             }
+            function showDifference() {
+                let a = parseInt(document.getElementById('numberA').value);
+                let b = parseInt(document.getElementById('numberB').value);
+                alert('Разность ' + a + ' и ' + b + ' равна ' + (a - b));
+            }
+            function showProduct() {
+                let a = parseInt(document.getElementById('numberA').value);
+                let b = parseInt(document.getElementById('numberB').value);
+                alert('Произведение ' + a + ' и ' + b + ' равно ' + (a * b));
+            }
+            function showDiv() {
+                let inputA = document.getElementById('numberA');
+                let inputB = document.getElementById('numberB');
+                let a = parseInt(inputA.value);
+                let b = parseInt(inputB.value);
 
+                if (b == 0) {
+                    alert('На ноль делить нельзя!');
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+
+                if(isNaN(a)) {
+                    alert('Введите числовое значение в первое поле');
+                    return;
+                }
+                if(isNaN(b)) {
+                    alert('Введите числовое значение во второе поле');
+                    return;
+                }
+                inputB.style.color = '';
+                inputB.style.borderColor = '';
+
+                let result = a / b;
+                alert('Отношение ' + a + ' и ' + b + ' равно ' + result);
+                }
             function showAuthor() {
                 let author = 'Автор страницы: \nБогданов Семён Андреевич';
                 alert(author);
@@ -59,6 +97,9 @@
             <label>Второе число: <input type="number" value="7891" id="numberB"></label><br>
             <div class="message" onclick="showSum()"><b>Найти сумму чисел</b></div>
             <div class="message" onclick="showAuthor()"><b>Узнать, кто автор страницы</b></div>
+            <div class="message" onclick="showDifference()"><b>Найти разность чисел</b></div>
+            <div class="message" onclick="showProduct()"><b>Найти произведение</b></div>
+            <div class="message" onclick="showDiv()"><b>Найти отноешние чисел</b></div>
         </main>
 
         <footer ondblclick="showGreeting()">

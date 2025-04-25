@@ -198,6 +198,18 @@
             function showGreeting() {
                 alert("Приветствую вас на моей странице!\nМой девиз: «Ты не ты, когда голоден, не голодай!»");
             }
+
+            function changeOutput(buttonNum, backColor, textColor, borderStyle, borderWidth, borderRadius) {
+                let output = document.getElementById('output');
+                output.innerHTML = 'Нажата кнопка ' + buttonNum;
+                output.style.backgroundColor = backColor;
+                output.style.color = textColor;
+
+                output.style.borderStyle = borderStyle;
+                output.style.borderWidth = borderWidth;
+                output.style.borderRadius = borderRadius;
+            }
+
         </script>
         <style>
             .message {
@@ -221,8 +233,15 @@
             header {
                 cursor: pointer;
             }
+
             footer {
                 cursor: pointer;
+            }
+
+            #output {
+                border: 1px solid;
+                width: 300px;
+                height: 40px;
             }
         </style>
     </head>
@@ -242,6 +261,14 @@
             <div class="message" onclick="showProduct()"><b>Найти произведение</b></div>
             <div class="message" onclick="showDiv()"><b>Найти отношение чисел</b></div>
             <div class="message" onclick="showPower()"><b>Возвести в степень</b></div>
+            <div>
+                <input type="button" value="Кнопка 1" onclick="changeOutput(1, 'red', 'yellow', 'solid', '3px', '10px')">
+                <input type="button" value="Кнопка 2" onclick="changeOutput(2, 'black', 'lime', 'dashed', '4px', '15px')">
+                <input type="button" value="Кнопка 3" onclick="changeOutput(3, 'purple', 'white', 'dotted', '5px', '20px')">
+                <input type="button" value="Кнопка 4" onclick="changeOutput(4, 'grey', 'orange', 'double', '6px', '5px')">
+            </div>
+
+            <div id='output'></div>
         </main>
 
         <footer ondblclick="showGreeting()">

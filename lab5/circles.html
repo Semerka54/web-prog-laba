@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Богданов Семён Андреевич. Лабораторная 5</title>
+  <link rel="stylesheet" href="../main.css">
+  <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+  <link rel="icon" href="../favicon-16x16(1).png">
+  <link rel="icon" href="../favicon-32x32(1).png">
+  <style>
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 60px;
+      position: absolute;
+      cursor: pointer;
+      transition: all 1s ease;
+      font-size: 18px;
+    }
+
+    .circle.hide {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      line-height: 0;
+      font-size: 0;
+    }
+
+    .reset-btn {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 90px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    НГТУ, ФБ, Лабораторная работа 5
+    <hr>
+  </header>
+
+  <button class="reset-btn" onclick="restoreCircles()">Показать все круги</button>
+
+  <footer>
+    <hr>
+    &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+  </footer>
+
+  <script>
+    const colors = ['#00cc00', '#ff6666', '#ff5555', '#ff9933', '#cc66ff', '#ffcc00', '#999999', '#339966', '#996600', '#ff3399'];
+    const circles = [];
+    const size = 60;
+    const padding = 10;
+    const maxAttempts = 100;
+
+    function isOverlapping(newX, newY) {
+      for (const circle of circles) {
+        const rect = circle.getBoundingClientRect();
+        const dx = rect.left - newX;
+        const dy = rect.top - newY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < size) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    for (let i = 0; i < 10; i++) {
+      const div = document.createElement('div');
+      div.classList.add('circle');
+      div.style.backgroundColor = colors[i];
+      div.textContent = i + 1;
+
+      let x, y, attempts = 0;
+      const maxX = window.innerWidth - size - padding;
+      const footerHeight = 60;
+      const buttonHeight = 50;
+      const topOffset = 80;
+      const bottomSafeZone = footerHeight + buttonHeight + 20;
+      const maxY = window.innerHeight - size - bottomSafeZone;
+
+      do {
+        x = Math.random() * maxX;
+        y = Math.random() * (maxY - topOffset) + topOffset;
+        attempts++;
+      } while (isOverlapping(x, y) && attempts < maxAttempts);
+
+      div.style.left = x + 'px';
+      div.style.top = y + 'px';
+
+      div.addEventListener('click', () => {
+        div.classList.add('hide');
+      });
+
+      document.body.appendChild(div);
+      circles.push(div);
+    }
+
+    function restoreCircles() {
+      circles.forEach(circle => {
+        circle.classList.remove('hide');
+      });
+    }
+  </script>
+</body>
+</html>

@@ -16,13 +16,15 @@ footer {
     background-color: black; 
     color: lightgreen; 
     padding: 20px; 
-    font-size: italic; 
+    font-size: 14px;
+    font-style: italic;
     text-align: right;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
 }
+
 
 main {
     background-color: rgb(16, 235, 216);

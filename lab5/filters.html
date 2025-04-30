@@ -14,8 +14,10 @@
             document.getElementById('blurOutput').innerText = blurVal;
 
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+            let contrastVal = document.getElementById('contrastValue')?.value || 100;
+
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + ') brightness(' + brightnessVal + '%)';
+                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%)';
         }
 
         function brightnessChange() {
@@ -23,8 +25,21 @@
             document.getElementById('brightnessOutput').innerText = brightnessVal;
 
             let blurVal = document.getElementById('blurValue')?.value || 0;
+            let contrastVal = document.getElementById('contrastValue')?.value || 100;
+
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ')';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%)';
+        }
+
+        function contrastChange() {
+            let contrastVal = document.getElementById('contrastValue').value + '%';
+            document.getElementById('contrastOutput').innerText = contrastVal;
+
+            let blurVal = document.getElementById('blurValue')?.value || 0;
+            let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ')';
         }
     </script>
 </head>
@@ -46,6 +61,12 @@
             <b>Фильтр brightness:</b>
             <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightnessValue">
             <span id="brightnessOutput">100%</span>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <b>Фильтр contrast:</b>
+            <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastValue">
+            <span id="contrastOutput">100%</span>
         </div>
 
         <div>

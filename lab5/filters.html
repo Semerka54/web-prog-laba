@@ -19,9 +19,10 @@
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function brightnessChange() {
@@ -34,9 +35,10 @@
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function contrastChange() {
@@ -49,9 +51,10 @@
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function grayscaleChange() {
@@ -64,9 +67,10 @@
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ') hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ') hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function hueRotateChange() {
@@ -79,9 +83,10 @@
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + ') invert(' + invertVal + '%) saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + ') invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function invertChange() {
@@ -94,9 +99,10 @@
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let saturateVal = document.getElementById('saturateValue')?.value || 100;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + ') saturate(' + saturateVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
         }
 
         function saturateChange() {
@@ -109,9 +115,26 @@
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let hueVal = document.getElementById('hueValue')?.value || 0;
             let invertVal = document.getElementById('invertValue')?.value || 0;
+            let sepiaVal = document.getElementById('sepiaValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + ')';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + '%)';
+        }
+
+        function sepiaChange() {
+            let sepiaVal = document.getElementById('sepiaValue').value + '%';
+            document.getElementById('sepiaOutput').innerText = sepiaVal;
+
+            let blurVal = document.getElementById('blurValue')?.value || 0;
+            let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+            let contrastVal = document.getElementById('contrastValue')?.value || 100;
+            let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
+            let saturateVal = document.getElementById('saturateValue')?.value || 100;
+
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%) saturate(' + saturateVal + '%) sepia(' + sepiaVal + ')';
         }
     </script>
 </head>
@@ -156,6 +179,11 @@
     <div><b>Фильтр saturate:</b>
         <input type="range" min="0" max="500" value="100" onchange="saturateChange()" id="saturateValue">
         <span id="saturateOutput">100%</span>
+    </div>
+
+    <div><b>Фильтр sepia:</b>
+        <input type="range" min="0" max="100" value="0" onchange="sepiaChange()" id="sepiaValue">
+        <span id="sepiaOutput">0%</span>
     </div>
 
     <div>

@@ -1,40 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>  
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Богданов Семён Андреевич. Лабораторная 5</title>
-        <link rel="stylesheet" href="../main.css">
-        <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
-        <link rel="icon" href="../favicon-16x16(1).png">
-        <link rel="icon" href="../favicon-32x32(1).png">
-        <script>
-            function blurChange() {
-                let value = document.getElementById('blurValue').value + 'px';
-                document.getElementById('blurOutput').innerText = value;
-                document.getElementById('blurImage').style.filter = 'blur('+ value +')';
-            }
-        </script>
-    </head>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 5</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <script>
+        function blurChange() {
+            let blurVal = document.getElementById('blurValue').value + 'px';
+            document.getElementById('blurOutput').innerText = blurVal;
 
-    <body>
-        <header>
-            НГТУ, ФБ, Лабораторная работа 5
-            <hr>
-        </header>
-        
-        <main>
-            <div>
-                <b>Фильтр blur:</b>
-                <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
-                <span id="blurOutput"></span>
-            </div>
-            <div><img src="krasota.jpg" id="blurImage" height="460" width="1275"></div>
-        </main>
+            let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + ') brightness(' + brightnessVal + '%)';
+        }
 
-        <footer>
-            <hr>
-            &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
-        </footer>
-    </body>
+        function brightnessChange() {
+            let brightnessVal = document.getElementById('brightnessValue').value + '%';
+            document.getElementById('brightnessOutput').innerText = brightnessVal;
+
+            let blurVal = document.getElementById('blurValue')?.value || 0;
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ')';
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+        <hr>
+    </header>
+
+    <main>
+        <div style="margin-bottom: 10px;">
+            <b>Фильтр blur:</b>
+            <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+            <span id="blurOutput">0px</span>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <b>Фильтр brightness:</b>
+            <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightnessValue">
+            <span id="brightnessOutput">100%</span>
+        </div>
+
+        <div>
+            <img src="krasota.jpg" id="blurImage" height="400" width="1275">
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+</body>
 </html>

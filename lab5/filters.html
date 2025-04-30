@@ -16,9 +16,10 @@
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%)';
+                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
         }
 
         function brightnessChange() {
@@ -28,9 +29,10 @@
             let blurVal = document.getElementById('blurValue')?.value || 0;
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
         }
 
         function contrastChange() {
@@ -40,9 +42,10 @@
             let blurVal = document.getElementById('blurValue')?.value || 0;
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
         }
 
         function grayscaleChange() {
@@ -52,9 +55,23 @@
             let blurVal = document.getElementById('blurValue')?.value || 0;
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ')';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ') hue-rotate(' + hueVal + 'deg)';
+        }
+
+        function hueRotateChange() {
+            let hueVal = document.getElementById('hueValue').value + 'deg';
+            document.getElementById('hueOutput').innerText = hueVal;
+
+            let blurVal = document.getElementById('blurValue')?.value || 0;
+            let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+            let contrastVal = document.getElementById('contrastValue')?.value || 100;
+            let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + ')';
         }
     </script>
 </head>
@@ -88,6 +105,12 @@
             <b>Фильтр grayscale:</b>
             <input type="range" min="0" max="100" value="0" onchange="grayscaleChange()" id="grayscaleValue">
             <span id="grayscaleOutput">0%</span>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <b>Фильтр hue-rotate:</b>
+            <input type="range" min="0" max="360" value="0" onchange="hueRotateChange()" id="hueValue">
+            <span id="hueOutput">0deg</span>
         </div>
 
         <div>

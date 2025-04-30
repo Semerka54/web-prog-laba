@@ -17,9 +17,10 @@
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let hueVal = document.getElementById('hueValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
+                'blur(' + blurVal + ') brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%)';
         }
 
         function brightnessChange() {
@@ -30,9 +31,10 @@
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let hueVal = document.getElementById('hueValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + ') contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%)';
         }
 
         function contrastChange() {
@@ -43,9 +45,10 @@
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
             let hueVal = document.getElementById('hueValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + ') grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%)';
         }
 
         function grayscaleChange() {
@@ -56,9 +59,10 @@
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let hueVal = document.getElementById('hueValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ') hue-rotate(' + hueVal + 'deg)';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + ') hue-rotate(' + hueVal + 'deg) invert(' + invertVal + '%)';
         }
 
         function hueRotateChange() {
@@ -69,58 +73,79 @@
             let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
             let contrastVal = document.getElementById('contrastValue')?.value || 100;
             let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let invertVal = document.getElementById('invertValue')?.value || 0;
 
             document.getElementById('blurImage').style.filter =
-                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + ')';
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + ') invert(' + invertVal + '%)';
+        }
+
+        function invertChange() {
+            let invertVal = document.getElementById('invertValue').value + '%';
+            document.getElementById('invertOutput').innerText = invertVal;
+
+            let blurVal = document.getElementById('blurValue')?.value || 0;
+            let brightnessVal = document.getElementById('brightnessValue')?.value || 100;
+            let contrastVal = document.getElementById('contrastValue')?.value || 100;
+            let grayscaleVal = document.getElementById('grayscaleValue')?.value || 0;
+            let hueVal = document.getElementById('hueValue')?.value || 0;
+
+            document.getElementById('blurImage').style.filter =
+                'blur(' + blurVal + 'px) brightness(' + brightnessVal + '%) contrast(' + contrastVal + '%) grayscale(' + grayscaleVal + '%) hue-rotate(' + hueVal + 'deg) invert(' + invertVal + ')';
         }
     </script>
 </head>
 
 <body>
-    <header>
-        НГТУ, ФБ, Лабораторная работа 5
-        <hr>
-    </header>
+<header>
+    НГТУ, ФБ, Лабораторная работа 5
+    <hr>
+</header>
 
-    <main>
-        <div style="margin-bottom: 10px;">
-            <b>Фильтр blur:</b>
-            <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
-            <span id="blurOutput">0px</span>
-        </div>
+<main>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр blur:</b>
+        <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+        <span id="blurOutput">0px</span>
+    </div>
 
-        <div style="margin-bottom: 10px;">
-            <b>Фильтр brightness:</b>
-            <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightnessValue">
-            <span id="brightnessOutput">100%</span>
-        </div>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр brightness:</b>
+        <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightnessValue">
+        <span id="brightnessOutput">100%</span>
+    </div>
 
-        <div style="margin-bottom: 10px;">
-            <b>Фильтр contrast:</b>
-            <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastValue">
-            <span id="contrastOutput">100%</span>
-        </div>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр contrast:</b>
+        <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastValue">
+        <span id="contrastOutput">100%</span>
+    </div>
 
-        <div style="margin-bottom: 10px;">
-            <b>Фильтр grayscale:</b>
-            <input type="range" min="0" max="100" value="0" onchange="grayscaleChange()" id="grayscaleValue">
-            <span id="grayscaleOutput">0%</span>
-        </div>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр grayscale:</b>
+        <input type="range" min="0" max="100" value="0" onchange="grayscaleChange()" id="grayscaleValue">
+        <span id="grayscaleOutput">0%</span>
+    </div>
 
-        <div style="margin-bottom: 10px;">
-            <b>Фильтр hue-rotate:</b>
-            <input type="range" min="0" max="360" value="0" onchange="hueRotateChange()" id="hueValue">
-            <span id="hueOutput">0deg</span>
-        </div>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр hue-rotate:</b>
+        <input type="range" min="0" max="360" value="0" onchange="hueRotateChange()" id="hueValue">
+        <span id="hueOutput">0deg</span>
+    </div>
 
-        <div>
-            <img src="krasota.jpg" id="blurImage" height="600" width="1275">
-        </div>
-    </main>
+    <div style="margin-bottom: 10px;">
+        <b>Фильтр invert:</b>
+        <input type="range" min="0" max="100" value="0" onchange="invertChange()" id="invertValue">
+        <span id="invertOutput">0%</span>
+    </div>
 
-    <footer>
-        <hr>
-        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
-    </footer>
+    <div>
+        <img src="krasota.jpg" id="blurImage" height="600" width="1275">
+    </div>
+</main>
+
+<footer>
+    <hr>
+    &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+</footer>
 </body>
 </html>

@@ -31,9 +31,9 @@
         function applyFilter(e) {
             const img = document.getElementById('img');
             const filterText = document.getElementById('filterName');
-            const bounds = img.getBoundingClientRect();
-            const x = e.clientX - bounds.left;
-            const percent = Math.min(Math.max(x / bounds.width, 0), 1);
+            const bounds = img.getBoundingClientRect(); // получаем координаты изображения на экране
+            const x = e.clientX - bounds.left; // вычисляем горизонтальную позицию курсра отн. изображения
+            const percent = Math.min(Math.max(x / bounds.width, 0), 1); // преобразуем координату x в процент от ширины изображения
 
             let filterType = 'blur';
             let unit = 'px';

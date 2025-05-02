@@ -10,8 +10,9 @@
     <link rel="icon" href="../favicon-32x32(1).png">
     <script>
         function showCoords(event) {
-            let x = event.offsetX;
-            let y = event.offsetY;
+            // координаты мыши внутри блока
+            let x = event.offsetX; // от левого края блока до курсора
+            let y = event.offsetY; // от верхнего края блока до курсора
             let div = document.getElementById('block');
 
             if (this.event.ctrlKey)

@@ -10,17 +10,19 @@
         <link rel="icon" href="../favicon-32x32(1).png">
         <script>
             function showSum() {
+                // находим элементы страницы с атрибутами,возвращаем ссылку на эти элементы
+                // cохраняем эти ссылки в переменные чтобы дальше обращаться к тому полю ввода
                 let inputA = document.getElementById('numberA');
                 let inputB = document.getElementById('numberB');
-                let a = parseInt(inputA.value);
+                let a = parseInt(inputA.value); // переводим текущий текст в число и сохраняем результат в переменную
                 let b = parseInt(inputB.value);
 
-                if (isNaN(a)) {
+                if (isNaN(a)) { // проверка: является ли a значением NaN
                     alert('Введите числовое значение в первое поле');
                     inputA.focus();
                     inputA.select();
                     inputA.style.color = 'red';
-                    inputA.style.borderColor = 'red';
+                    inputA.style.borderColor = 'red'; 
                     return;
                 }
                 if (isNaN(b)) {
@@ -32,6 +34,7 @@
                     return;
                 }
 
+                // Сброс стилей полей после успешной проверки
                 inputA.style.color = '';
                 inputA.style.borderColor = '';
                 inputB.style.color = '';
@@ -42,7 +45,7 @@
             }
 
             function showDifference() {
-                let inputA = document.getElementById('numberA');
+                let inputA = document.getElementById('numberA'); 
                 let inputB = document.getElementById('numberB');
                 let a = parseInt(inputA.value);
                 let b = parseInt(inputB.value);
@@ -209,7 +212,6 @@
                 output.style.borderWidth = borderWidth;
                 output.style.borderRadius = borderRadius;
             }
-
         </script>
         <style>
             .message {
@@ -268,7 +270,8 @@
                 <input type="button" value="Кнопка 4" onclick="changeOutput(4, 'grey', 'orange', 'double', '6px', '5px')">
             </div>
 
-            <div id='output'></div>
+            <!-- Это контейнер, в который функция changeOutput будет записывать свой результат -->
+            <div id='output'></div> 
         </main>
 
         <footer ondblclick="showGreeting()">

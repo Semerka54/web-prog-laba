@@ -31,6 +31,7 @@
       font-size: 0;
     }
 
+    /* фиксирование кнопки */
     .reset-btn {
       position: fixed;
       left: 50%;
@@ -66,15 +67,17 @@
     const circles = [];
     const size = 60;
     const padding = 10;
-    const maxAttempts = 100;
+    const maxAttempts = 100; // попытки найти свободное место
 
     function isOverlapping(newX, newY) {
+        // проходит по каждому элементу массива circles, где мы храним ссылки на все уже нарисованные на экране <div class="circle">
       for (const circle of circles) {
+        // Этот метод возвращает объект с координатами и размерами элемента
         const rect = circle.getBoundingClientRect();
-        const dx = rect.left - newX;
-        const dy = rect.top - newY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < size) {
+        const dx = rect.left - newX; // горизонтальная разница между существующим кругом и местом, где мы хотим разместить новый
+        const dy = rect.top - newY; // вертикальная разница
+        const distance = Math.sqrt(dx * dx + dy * dy); // линейное расстояние
+        if (distance < size) { // пересечение
           return true;
         }
       }
@@ -88,32 +91,37 @@
       div.textContent = i + 1;
 
       let x, y, attempts = 0;
-      const maxX = window.innerWidth - size - padding;
+    // maxX и maxY рассчитывают, в каких пределах (по горизонтали и вертикали) можно помещать левый верхний угол круга 
+    // так, чтобы он был полностью виден и не заезжал на header, кнопку и footer
+    // window.innerWidth — ширина области просмотра
+      const maxX = window.innerWidth - size - padding; // горизонтальная граница
       const footerHeight = 60;
       const buttonHeight = 50;
-      const topOffset = 80;
+      const topOffset = 80; // Отступ сверху
       const bottomSafeZone = footerHeight + buttonHeight + 20;
+      // window.innerHeight — высота видимой области экрана
       const maxY = window.innerHeight - size - bottomSafeZone;
 
       do {
-        x = Math.random() * maxX;
-        y = Math.random() * (maxY - topOffset) + topOffset;
-        attempts++;
-      } while (isOverlapping(x, y) && attempts < maxAttempts);
+        x = Math.random() * maxX; // равномерно случайное число от 0 до maxX
+        y = Math.random() * (maxY - topOffset) + topOffset; // y ∈ [topOffset, maxY)
+        attempts++; // Увеличиваем счётчик attempts на 1
+      } while (isOverlapping(x, y) && attempts < maxAttempts); // пока условие верно, повторяй ещё
 
       div.style.left = x + 'px';
       div.style.top = y + 'px';
 
+    //   исчезновение круга
       div.addEventListener('click', () => {
         div.classList.add('hide');
       });
 
-      document.body.appendChild(div);
-      circles.push(div);
+      document.body.appendChild(div); // добавляет созданный div (круг) в тело HTML-страницы
+      circles.push(div); // сохраняет этот круг в массив circles
     }
 
     function restoreCircles() {
-      circles.forEach(circle => {
+      circles.forEach(circle => { // перебирает все круги в массиве circles
         circle.classList.remove('hide');
       });
     }

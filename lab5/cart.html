@@ -9,6 +9,7 @@
     <link rel="icon" href="../favicon-16x16(1).png">
     <link rel="icon" href="../favicon-32x32(1).png">
     <style>
+        /* Оформление контейнера корзины */
         .cart {
             background-color: #bde1f0;
             border: 2px solid #333;
@@ -17,17 +18,21 @@
             width: 300px;
             margin: 50px auto;
         }
+        /* Заголовок в корзине */
         .cart h2 {
             text-align: center;
             color: #800000;
         }
+        /* Отдельный товар */
         .item {
             margin-bottom: 15px;
         }
+        /* Поля ввода числа */
         input[type="number"] {
             width: 100%;
             padding: 5px;
         }
+        /* Кнопки «Рассчитать» и «Очистить» */
         button {
             display: block;
             width: 100%;
@@ -38,6 +43,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        /* Блок с результатом расчёта */
         .result {
             margin-top: 10px;
             font-weight: bold;
@@ -56,6 +62,7 @@
         <div class="cart">
             <h2>Корзина товаров</h2>
 
+            <!-- Пять товаров, каждый со своим ценником и полем для ввода количества -->
             <div class="item">
                 Яблоки (100р/шт):
                 <input type="number" id="item1" min="0" placeholder="Сколько яблок надо?">
@@ -77,9 +84,11 @@
                 <input type="number" id="item5" min="0" placeholder="Введите число персиков">
             </div>
 
+            <!-- Кнопки действий -->
             <button onclick="calculateTotal()">Рассчитать</button>
             <button onclick="clearCart()">Очистить</button>
 
+            <!-- Итоговая сумма -->
             <div class="result" id="result"></div>
         </div>
     </main>
@@ -91,8 +100,9 @@
 
     <script>
         function calculateTotal() {
-            const prices = [100, 80, 150, 300, 120];
+            const prices = [100, 80, 150, 300, 120]; // Задаём массив цен
             const inputs = [
+                // Получаем ссылки на пять полей ввода
                 document.getElementById("item1"),
                 document.getElementById("item2"),
                 document.getElementById("item3"),
@@ -100,10 +110,14 @@
                 document.getElementById("item5")
             ];
 
+            // Переменная для накопления итоговой суммы
             let total = 0;
 
+            // i будет отвечать за индекс текущего элемента массива inputs
+            // inputs.length — количество элементов в массиве inputs
+            // После каждой итерации значение i увеличивается на 1, и снова проверяется условие i < inputs.length
             for (let i = 0; i < inputs.length; i++) {
-                let value = parseInt(inputs[i].value) || 0;
+                let value = parseInt(inputs[i].value) || 0; // берёт числовую часть из ввода пользователя по индексу и сохраняет
 
                 if (value < 0) {
                     alert("Количество товара не может быть отрицательным!");
@@ -117,12 +131,14 @@
                 total += prices[i] * value;
             }
 
+            // удаляет прежний текст и вставляет новый 
             document.getElementById("result").innerText = "Общая цена: " + total + " р";
         }
 
         function clearCart() {
+            // Цикл перебирает целые значения i от 1 до 5 включительно
             for (let i = 1; i <= 5; i++) {
-                document.getElementById("item" + i).value = "";
+                document.getElementById("item" + i).value = ""; // при следующем расчёте эта строка будет интерпретироваться как 0
                 document.getElementById("item" + i).style.borderColor = "";
             }
             document.getElementById("result").innerText = "";

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Богданов Семён Андреевич. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16(1).png">
+        <link rel="icon" href="../favicon-32x32(1).png">
+        <script>
+            function showMutipleTable() {
+                let tbl = document.getElementById('mtable');
+                let num1 = document.getElementById('numberA').value;
+                let num2 = document.getElementById('numberB').value;
+                let num3 = document.getElementById('numberC').value;
+                tbl.innerHTML = '<h1>Таблица умножения</h1>';
+                for(i = num2; num2 <= num3; num2++) {
+                    let s = `<div>${num2} * ${num1} = ${num2*num1}</div>`;
+                    tbl.innerHTML += s;
+                }
+            }
+            showMutipleTable()
+        </script>
+        <style>
+            div {
+                border-radius: 10px;
+                margin: 20px;
+                color: blueviolet;
+            }
+        </style>
+    </head>
+
+    <body onload="showMutipleTable()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+        
+        <main>
+            <div id="mtable"></div>
+            <label><b>Умножить на:</b><input type="number" value="0" id="numberA"></label><br>
+            <label><b>Начать с:</b><input type="number" value="0" id="numberB"></label><br>
+            <label><b>Закончить на:</b><input type="number" value="0" id="numberC"></label><br>
+            <div onclick="showMutipleTable()"><b>Таблица</b></div>
+        </main> 
+
+        <footer>
+            <hr>
+            &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+        </footer>
+    </body>
+</html>

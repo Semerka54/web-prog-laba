@@ -1,53 +1,112 @@
 <!DOCTYPE html>
 <html>
-    <head>  
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Богданов Семён Андреевич. Лабораторная 6</title>
-        <link rel="stylesheet" href="../main.css">
-        <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
-        <link rel="icon" href="../favicon-16x16(1).png">
-        <link rel="icon" href="../favicon-32x32(1).png">
-        <script>
-            function showMutipleTable() {
-                let tbl = document.getElementById('mtable');
-                let num1 = document.getElementById('numberA').value;
-                let num2 = document.getElementById('numberB').value;
-                let num3 = document.getElementById('numberC').value;
-                tbl.innerHTML = '<h1>Таблица умножения</h1>';
-                for(i = num2; num2 <= num3; num2++) {
-                    let s = `<div>${num2} * ${num1} = ${num2*num1}</div>`;
-                    tbl.innerHTML += s;
-                }
-            }
-            showMutipleTable()
-        </script>
-        <style>
-            div {
-                border-radius: 10px;
-                margin: 20px;
-                color: blueviolet;
-            }
-        </style>
-    </head>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        #mtable {
+            margin-bottom: 20px;
+            background-color: #e0f0ff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-    <body onload="showMutipleTable()">
-        <header>
-            НГТУ, ФБ, Лабораторная работа 6
-            <hr>
-        </header>
-        
-        <main>
-            <div id="mtable"></div>
-            <label><b>Умножить на:</b><input type="number" value="0" id="numberA"></label><br>
-            <label><b>Начать с:</b><input type="number" value="0" id="numberB"></label><br>
-            <label><b>Закончить на:</b><input type="number" value="0" id="numberC"></label><br>
-            <div onclick="showMutipleTable()"><b>Таблица</b></div>
-        </main> 
+        label {
+            display: block;
+            margin: 10px 0;
+        }
 
-        <footer>
-            <hr>
-            &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
-        </footer>
-    </body>
+        input[type="number"] {
+            width: 100%;
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #800000;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #a00000;
+        }
+
+        .result-line {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        main {
+            padding-bottom: 30px; /* или больше, если футер выше */
+        }
+
+    </style>
+
+    <script>
+        function showMultipleTable() {
+            let num1 = parseInt(document.getElementById('numberA').value);
+            let start = parseInt(document.getElementById('numberB').value);
+            let end = parseInt(document.getElementById('numberC').value);
+            let tbl = document.getElementById('mtable');
+
+            if (isNaN(num1) || isNaN(start) || isNaN(end)) {
+                tbl.innerHTML = '<p style="color: red;">Пожалуйста, заполните все поля числами.</p>';
+                return;
+            }
+
+            if (start > end) {
+                // если начальное значение больше конечного — меняем их местами
+                [start, end] = [end, start];
+            }
+
+            let output = `<h2>Таблица умножения на ${num1}</h2>`;
+            for (let i = start; i <= end; i++) {
+                output += `<div class="result-line">${i} × ${num1} = ${i * num1}</div>`;
+            }
+
+            tbl.innerHTML = output;
+        }
+    </script>
+</head>
+
+<body onload="showMultipleTable()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+        <hr>
+    </header>
+    
+    <main>
+        <div id="mtable"></div>
+
+        <label><b>Умножить на:</b>
+            <input type="number" value="2" id="numberA">
+        </label>
+        <label><b>Начать с:</b>
+            <input type="number" value="1" id="numberB">
+        </label>
+        <label><b>Закончить на:</b>
+            <input type="number" value="10" id="numberC">
+        </label>
+
+        <div class="btn" onclick="showMultipleTable()">Таблица</div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+</body>
 </html>

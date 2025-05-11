@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Богданов Семён Андреевич. Лабораторная 6</title>
+        <link rel="stylesheet" href="../main.css">
+        <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+        <link rel="icon" href="../favicon-16x16(1).png">
+        <link rel="icon" href="../favicon-32x32(1).png">
+        <style>
+            #current-date {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 18px;
+                color: #333;
+                background-color: #f9f9f9;
+                padding: 20px;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                margin: 20px;
+                line-height: 1.6;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+        
+            #current-date b {
+                color: #d825a2;
+            }
+        
+            #current-date br {
+                margin-bottom: 10px;
+            }
+        </style>
+        <script>
+            function showDate() {
+                let out = document.getElementById('current-date');
+                let today = new Date();
+        
+                out.innerHTML = `
+                    <div><b>Русская локаль:</b> ${today.toLocaleString('ru-RU')}</div>
+                    <div><b>Американская локаль:</b> ${today.toLocaleString('en-US')}</div>
+                    <div><b>Французская локаль:</b> ${today.toLocaleString('fr-FR')}</div>
+                    <div><b>Китайская локаль:</b> ${today.toLocaleString('zh-CN')}</div>
+                    <div><b>Японская локаль:</b> ${today.toLocaleString('ja-JP')}</div>
+                    <div><b>Арабская локаль (Египет):</b> ${today.toLocaleString('ar-EG')}</div>
+                `;
+            }
+        </script>
+    </head>
+
+    <body onload="showDate()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+            <hr>
+        </header>
+        
+        <main>
+            <div id="current-date"></div>
+        </main> 
+
+        <footer>
+            <hr>
+            &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+        </footer>
+    </body>
+</html>

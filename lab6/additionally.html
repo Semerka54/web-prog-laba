@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        #chart {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 300px;
+            width: 1000px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #000;
+            margin-bottom: 10px;
+            overflow-x: auto;
+        }
+
+        .bar {
+            width: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        .min, .max {
+            width: 100%;
+            color: black;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .min {
+            background-color: blue;
+            color: white;
+        }
+
+        .max {
+            background-color: lightblue;
+        }
+
+        .highlight .min {
+            background-color: rgb(201, 42, 63) !important;
+        }
+
+        .highlight .max {
+            background-color: rgb(250, 38, 38) !important;
+        }
+
+        input, button {
+            padding: 4px 10px;
+            margin: 5px 0;
+        }
+
+        #info {
+            font-family: sans-serif;
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    НГТУ, ФБ, Лабораторная работа 6
+    <hr>
+</header>
+
+<main>
+    <div id="chart"></div>
+
+    <div>
+        Номер дня:
+        <input type="number" id="dayInput" min="1" max="30">
+        <button onclick="highlightDay()">найти</button>
+    </div>
+
+    <div id="info"></div>
+
+    <script>
+        const chart = document.getElementById('chart');
+        const info = document.getElementById('info');
+        const dayInput = document.getElementById('dayInput');
+        const days = 30;
+        let data = [];
+        let bars = [];
+
+        // Генерация случайных температур
+        for (let i = 0; i < days; i++) {
+            let min = Math.floor(Math.random() * 11) + 10; // 10–20
+            let max = min + Math.floor(Math.random() * 11) + 5; // +5–15
+            data.push({ min, max });
+        }
+
+        // Построение диаграммы
+        for (let i = 0; i < days; i++) {
+            const bar = document.createElement('div');
+            bar.classList.add('bar');
+
+            const maxDiv = document.createElement('div');
+            maxDiv.classList.add('max');
+            maxDiv.style.height = (data[i].max - data[i].min) * 7 + 'px';
+            maxDiv.innerText = data[i].max + '°C';
+
+            const minDiv = document.createElement('div');
+            minDiv.classList.add('min');
+            minDiv.style.height = data[i].min * 7 + 'px';
+            minDiv.innerText = data[i].min + '°C';
+
+            bar.appendChild(maxDiv);
+            bar.appendChild(minDiv);
+            chart.appendChild(bar);
+            bars.push(bar);
+        }
+
+        function highlightDay() {
+            const day = parseInt(dayInput.value);
+            bars.forEach(b => b.classList.remove('highlight'));
+            if (day >= 1 && day <= 30) {
+                bars[day - 1].classList.add('highlight');
+                info.innerHTML = `
+                    <b>Минимальная температура:</b> ${data[day - 1].min}°C<br>
+                    <b>Максимальная температура:</b> ${data[day - 1].max}°C
+                `;
+            } else {
+                info.innerHTML = 'Неверный номер дня!';
+            }
+        }
+    </script>
+</main>
+
+<footer>
+    <hr>
+    &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+</footer>
+</body>
+</html>

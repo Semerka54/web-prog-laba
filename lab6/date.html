@@ -65,19 +65,33 @@
             header.style.color = rgb;
         }
 
-        let timerNum;
+        let colorTimer;
+        let timeTimer;
 
         function startChangeColors() {
             changeColors();
-            timerNum = setInterval(changeColors, 1500); // Период можно изменить
+            colorTimer = setInterval(changeColors, 1500);
             document.getElementById('start-btn').disabled = true;
             document.getElementById('stop-btn').disabled = false;
         }
 
         function stopChangeColors() {
-            clearInterval(timerNum);
+            clearInterval(colorTimer);
             document.getElementById('start-btn').disabled = false;
             document.getElementById('stop-btn').disabled = true;
+        }
+
+        function startUpdateTime() {
+            showDate();
+            timeTimer = setInterval(showDate, 1000);
+            document.getElementById('update-btn').disabled = true;
+            document.getElementById('stop-update-btn').disabled = false;
+        }
+
+        function stopUpdateTime() {
+            clearInterval(timeTimer);
+            document.getElementById('update-btn').disabled = false;
+            document.getElementById('stop-update-btn').disabled = true;
         }
     </script>
 </head>
@@ -91,8 +105,10 @@
     <main>
         <div id="current-date"></div>
         <div>
-            <button id="start-btn" onclick="startChangeColors()">Старт</button>
-            <button id="stop-btn" onclick="stopChangeColors()" disabled>Стоп</button>
+            <button id="start-btn" onclick="startChangeColors()">Старт цвета</button>
+            <button id="stop-btn" onclick="stopChangeColors()" disabled>Стоп цвета</button>
+            <button id="update-btn" onclick="startUpdateTime()">Обновлять время</button>
+            <button id="stop-update-btn" onclick="stopUpdateTime()" disabled>Остановить обновление</button>
         </div>
     </main> 
 

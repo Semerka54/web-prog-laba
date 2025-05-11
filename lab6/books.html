@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 6</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        #booklist {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .book {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-left: 6px solid #007BFF;
+            border-radius: 4px;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .bestseller {
+            border-left-color: gold;
+        }
+
+        .badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .available {
+            color: green;
+            font-style: italic;
+        }
+
+        .unavailable {
+            opacity: 0.6;
+            font-style: italic;
+            border-color: gray;
+        }
+
+        .price {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+    <script src="books.js" defer></script>
+    <script>
+        function showBooks() {
+            const booklist = document.getElementById('booklist');
+            for (let i = 0; i < books.length; i++) {
+                const book = books[i];
+                const div = document.createElement('div');
+                div.classList.add('book');
+                if (book.bestseller) div.classList.add('bestseller');
+                if (!book.available) div.classList.add('unavailable');
+
+                div.innerHTML = `
+                    <div class="price">${book.price} ₽</div>
+                    <b>${book.author}</b><br>
+                    <i>${book.name}</i> &mdash; ${book.publicationYear}
+                    <br>
+                    ${book.available 
+                        ? '<span class="available">В наличии</span>' 
+                        : '<span style="color:red">Нет в наличии</span>'}
+                    ${book.bestseller 
+                        ? '<div class="badge">★ Бестселлер</div>' 
+                        : ''}
+                `;
+
+                booklist.appendChild(div);
+            }
+        }
+    </script>
+</head>
+
+<body onload="showBooks()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+        <hr>
+    </header>
+
+    <main>
+        <h1>Список книг</h1>
+        <div id="booklist"></div>
+    </main> 
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+</body>
+</html>

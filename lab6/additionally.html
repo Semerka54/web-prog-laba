@@ -9,6 +9,7 @@
     <link rel="icon" href="../favicon-16x16(1).png">
     <link rel="icon" href="../favicon-32x32(1).png">
     <style>
+        /* область с графиком */
         #chart {
             display: flex;
             justify-content: space-between;
@@ -21,6 +22,7 @@
             margin-bottom: 10px;
             overflow-x: auto;
         }
+
 
         .bar {
             width: 24px;
@@ -96,7 +98,7 @@
         for (let i = 0; i < days; i++) {
             let min = Math.floor(Math.random() * 11) + 10; // 10–20
             let max = min + Math.floor(Math.random() * 11) + 5; // +5–15
-            data.push({ min, max });
+            data.push({ min, max }); // сохраняем в массив
         }
 
         // Построение диаграммы
@@ -114,15 +116,15 @@
             minDiv.style.height = data[i].min * 7 + 'px';
             minDiv.innerText = data[i].min + '°C';
 
-            bar.appendChild(maxDiv);
+            bar.appendChild(maxDiv); // вставляем верхний блок в один столбик
             bar.appendChild(minDiv);
-            chart.appendChild(bar);
-            bars.push(bar);
+            chart.appendChild(bar); // вставляем столбик с двумя блоками в контейнер
+            bars.push(bar); // сохраняем ссылку на этот столбик в массив
         }
 
         function highlightDay() {
             const day = parseInt(dayInput.value);
-            bars.forEach(b => b.classList.remove('highlight'));
+            bars.forEach(b => b.classList.remove('highlight')); // убираем подсветку 
             if (day >= 1 && day <= 30) {
                 bars[day - 1].classList.add('highlight');
                 info.innerHTML = `

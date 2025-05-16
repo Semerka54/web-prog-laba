@@ -9,13 +9,15 @@
     <link rel="icon" href="../favicon-16x16(1).png">
     <link rel="icon" href="../favicon-32x32(1).png">
     <style>
+        /* Контейнер для списка книг */
         #booklist {
             margin: 20px;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* книги идут в столбик */
             gap: 10px;
         }
 
+        /* Основной стиль карточки книги */
         .book {
             padding: 10px;
             border: 1px solid #ccc;
@@ -32,6 +34,7 @@
             border-left-color: gold;
         }
 
+        /* ★ Бестселлер */
         .badge {
             position: absolute;
             bottom: 10px;
@@ -40,17 +43,20 @@
             font-weight: bold;
         }
 
+        /* в наличии */
         .available {
             color: green;
             font-style: italic;
         }
 
+        /* нет в наличии */
         .unavailable {
             opacity: 0.6;
             font-style: italic;
             border-color: gray;
         }
 
+        /* Цена книги */
         .price {
             position: absolute;
             top: 10px;
@@ -62,10 +68,11 @@
     <script src="books.js" defer></script>
     <script>
         function showBooks() {
-            const booklist = document.getElementById('booklist');
+            const booklist = document.getElementById('booklist'); // Получаем элемент, в который будем вставлять карточки книг
             for (let i = 0; i < books.length; i++) {
                 const book = books[i];
                 const div = document.createElement('div');
+                // добавляем классы
                 div.classList.add('book');
                 if (book.bestseller) div.classList.add('bestseller');
                 if (!book.available) div.classList.add('unavailable');
@@ -83,7 +90,7 @@
                         : ''}
                 `;
 
-                booklist.appendChild(div);
+                booklist.appendChild(div); // Добавляем готовую карточку (div) в контейнер #booklist на страницу
             }
         }
     </script>

@@ -9,14 +9,14 @@
   <link rel="icon" href="../favicon-16x16(1).png">
   <link rel="icon" href="../favicon-32x32(1).png">
   <style>
+    /* контейнер для диаграммы */
     #diag {
       width: fit-content;
       height: 400px;
       background-color: #dff4f6;
       border: 1px solid black;
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      flex-direction: column;
+      display: grid; /* Контейнер превращается в CSS-сетку,где элементы (столбцы) будут размещаться по колонкам. */
+      grid-template-columns: repeat(10, 1fr); /* Разбиваем контейнер на 10 равных колонок */
       align-items: end;
       justify-content: flex-start;
       padding: 0px;

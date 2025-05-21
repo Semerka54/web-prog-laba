@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        #weather-result {
+            margin-top: 20px;
+            border: 2px solid #0099cc;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #e9f7ff;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    <script>
+        function getWeather() {
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m";
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const times = data.hourly.time;
+                    const temps = data.hourly.temperature_2m;
+
+                    const targetHours = ["08:00", "12:00", "20:00"];
+
+                    const now = new Date();
+                    const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+                    const yesterdayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1));
+
+                    const todayStr = todayUTC.toISOString().split('T')[0];
+                    const yesterdayStr = yesterdayUTC.toISOString().split('T')[0];
+
+                    const hasTodayData = times.includes(`${todayStr}T08:00`);
+                    const dateToUse = hasTodayData ? todayStr : yesterdayStr;
+                    const label = hasTodayData ? 'сегодня' : 'вчера';
+
+                    let resultHTML = `<h3>Температура в Новосибирске на ${label} (${dateToUse}):</h3><ul>`;
+
+                    targetHours.forEach(hour => {
+                        const timeStr = `${dateToUse}T${hour}`;
+                        const index = times.indexOf(timeStr);
+                        if (index !== -1) {
+                            resultHTML += `<li><strong>${hour}</strong>: ${temps[index]} °C</li>`;
+                        } else {
+                            resultHTML += `<li><strong>${hour}</strong>: данные недоступны</li>`;
+                        }
+                    });
+
+                    resultHTML += `</ul><p>Источник: <a href="https://open-meteo.com/en/docs" target="_blank">open-meteo.com</a></p>`;
+
+                    const resultDiv = document.getElementById("weather-result");
+                    resultDiv.innerHTML = resultHTML;
+                    resultDiv.style.display = "block";
+                })
+                .catch(error => {
+                    console.error("Ошибка при получении погоды:", error);
+                    document.getElementById("weather-result").innerText = "Не удалось получить данные о погоде.";
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <button onclick="getWeather()">Погода в Новосибирске</button>
+        <div id="weather-result" style="display: none;"></div>
+    </main> 
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+</body>
+</html>

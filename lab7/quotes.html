@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        td.diff-positive { color: green; }
+        td.diff-negative { color: red; }
+        td.diff-zero { color: black; }
+    </style>
+    <script>
+        function showStocks() {
+            const dates = [
+                "06.05.2025", "07.05.2025", "08.05.2025", "12.05.2025", "13.05.2025",
+                "14.05.2025", "15.05.2025", "16.05.2025", "19.05.2025", "20.05.2025"
+            ];
+            const prices = [3.52, 3.56, 3.57, 3.60, 3.60, 3.52, 3.51, 3.52, 3.55, 3.53];
+
+            let table = document.createElement('table');
+            table.border = "1";
+
+            let header = table.insertRow();
+            header.insertCell().innerText = "Дата";
+            header.insertCell().innerText = "Цена, руб";
+            header.insertCell().innerText = "Изменение";
+
+            for (let i = 0; i < dates.length; i++) {
+                let row = table.insertRow();
+                row.insertCell().innerText = dates[i];
+                row.insertCell().innerText = prices[i].toFixed(2);
+
+                let diffCell = row.insertCell();
+                if (i === 0) {
+                    diffCell.innerText = "-";
+                } else {
+                    let diff = (prices[i] - prices[i - 1]).toFixed(2);
+                    diffCell.innerText = diff;
+
+                    if (diff > 0) {
+                        diffCell.className = "diff-positive";
+                    } else if (diff < 0) {
+                        diffCell.className = "diff-negative";
+                    } else {
+                        diffCell.className = "diff-zero";
+                    }
+                }
+            }
+
+            // Добавляем таблицу в результат
+            document.getElementById('stock-result').appendChild(table);
+
+            // Расчёт статистики
+            let sum = 0;
+            let max = prices[0];
+            let min = prices[0];
+            for (let i = 0; i < prices.length; i++) {
+                sum += prices[i];
+                if (prices[i] > max) max = prices[i];
+                if (prices[i] < min) min = prices[i];
+            }
+            let avg = (sum / prices.length).toFixed(2);
+
+            // Вывод статистики
+            let stats = document.createElement('div');
+            stats.innerHTML = `
+                <p>Средняя цена: <strong>${avg}</strong> руб</p>
+                <p>Максимальная цена: <strong>${max.toFixed(2)}</strong> руб</p>
+                <p>Минимальная цена: <strong>${min.toFixed(2)}</strong> руб</p>
+            `;
+            document.getElementById('stock-result').appendChild(stats);
+
+            // Удаление кнопки
+            document.getElementById('stock-button').remove();
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <button id="stock-button" onclick="showStocks()">Курс акций Интер РАО</button>
+        <div id="stock-result"></div>
+    </main>
+
+    <footer>

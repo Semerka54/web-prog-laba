@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #current {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e9f7ff;
+            border-left: 4px solid #0099cc;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            max-width: 100%;
+            height: 240px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 40px; /* отступ от футера */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <h2>График температуры и влажности</h2>
+        <div id="current">Загрузка данных...</div>
+        <canvas id="weatherChart"></canvas>
+    </main> 
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+
+    <script>
+        async function fetchWeather() {
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346" +
+                        "&hourly=temperature_2m,relative_humidity_2m&past_days=1&forecast_days=1" +
+                        "&current_weather=true&timezone=Asia%2FBangkok";
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const time = data.hourly.time;
+            const temp = data.hourly.temperature_2m;
+            const humidity = data.hourly.relative_humidity_2m;
+
+            const nowTime = data.current_weather.time;
+            const currentTemp = data.current_weather.temperature;
+
+            // Найдём ближайший час
+            const roundedHour = nowTime.slice(0, 13) + ":00";
+            const humidityIndex = time.indexOf(roundedHour);
+            const currentHumidity = humidityIndex !== -1 ? humidity[humidityIndex] : "недоступно";
+
+            document.getElementById('current').innerHTML = `
+                <strong>Текущая температура:</strong> ${currentTemp} °C<br>
+                <strong>Текущая влажность:</strong> ${currentHumidity}%<br>
+                <strong>Время:</strong> ${nowTime}
+            `;
+
+            const labels = [];
+            const realTemp = [];
+            const forecastTemp = [];
+            const humidityData = [];
+
+            for (let i = 0; i < time.length; i++) {
+                const [date, hour] = time[i].split("T");
+                labels.push(`${date}\n${hour}`);
+                humidityData.push(humidity[i]);
+
+                if (time[i] <= nowTime) {
+                    realTemp.push(temp[i]);
+                    forecastTemp.push(null);
+                } else {
+                    realTemp.push(null);
+                    forecastTemp.push(temp[i]);
+                }
+            }
+
+            const ctx = document.getElementById("weatherChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Температура",
+                            data: realTemp,
+                            backgroundColor: "rgba(54, 162, 235, 0.6)",
+                            stack: "temperature"
+                        },
+                        {
+                            label: "Температура (прогноз)",
+                            data: forecastTemp,
+                            backgroundColor: "rgba(255, 99, 132, 0.6)",
+                            stack: "temperature"
+                        },
+                        {
+                            label: "Влажность (%)",
+                            data: humidityData,
+                            type: "line",
+                            yAxisID: "humidityAxis",
+                            borderColor: "rgba(0, 128, 0, 0.8)",
+                            tension: 0.3,
+                            fill: false,
+                            pointRadius: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 0,
+                                autoSkip: true,
+                                callback: function (value, index) {
+                                    return labels[index];
+                                }
+                            }
+                        },
+                        y: {
+                            title: { display: true, text: "Температура (°C)" }
+                        },
+                        humidityAxis: {
+                            position: "right",
+                            title: { display: true, text: "Влажность (%)" },
+                            grid: { drawOnChartArea: false }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "Температура и влажность: текущие и прогнозируемые значения"
+                        },
+                        tooltip: {
+                            mode: "index",
+                            intersect: false
+                        },
+                        legend: {
+                            labels: {
+                                boxWidth: 18,
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchWeather();
+    </script>
+</body>
+</html>

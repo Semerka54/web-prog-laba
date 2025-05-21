@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богданов Семён Андреевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon(1).ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-16x16(1).png">
+    <link rel="icon" href="../favicon-32x32(1).png">
+    <style>
+        #euro-result {
+            display: none; /* Изначально скрыт */
+            border: 2px solid #4a90e2;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #f2f7ff;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        #euro-result .diff-up {
+            color: green;
+        }
+        #euro-result .diff-down {
+            color: red;
+        }
+        #euro-result .diff-equal {
+            color: black;
+        }
+    </style>
+    <script>
+        function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const euro = data.Valute.EUR;
+                    const current = euro.Value;
+                    const previous = euro.Previous;
+                    const date = new Date(data.Date).toLocaleDateString('ru-RU');
+
+                    const diff = (current - previous).toFixed(4);
+                    let diffClass = '';
+                    let explanation = '';
+
+                    if (current > previous) {
+                        diffClass = 'diff-up';
+                        explanation = 'Курс поднялся 📈';
+                    } else if (current < previous) {
+                        diffClass = 'diff-down';
+                        explanation = 'Курс опустился 📉';
+                    } else {
+                        diffClass = 'diff-equal';
+                        explanation = 'Курс не изменился';
+                    }
+
+                    const resultDiv = document.getElementById('euro-result');
+                    resultDiv.innerHTML = `
+                        <h3>Курс евро на ${date}</h3>
+                        <p>Текущий курс: <strong>${current.toFixed(2)}</strong> руб.</p>
+                        <p>Курс за предыдущую дату: <strong>${previous.toFixed(2)}</strong> руб.</p>
+                        <p>Разница: <span class="${diffClass}">${diff}</span> — ${explanation}</p>
+                        <p>Источник: <a href="https://www.cbr-xml-daily.ru/" target="_blank">cbr-xml-daily.ru</a></p>
+                    `;
+                    resultDiv.style.display = 'block'; // Показываем блок
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении курса евро:', error);
+                    const resultDiv = document.getElementById('euro-result');
+                    resultDiv.innerText = 'Не удалось получить данные о курсе.';
+                    resultDiv.style.display = 'block';
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="euro-result"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Семён Богданов, ФБИ - 32, 2 курс, 2025
+    </footer>
+</body>
+</html>

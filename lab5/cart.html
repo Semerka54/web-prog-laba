@@ -145,6 +145,7 @@
         }
 
         // Блокировка ввода отрицательных чисел и e/E в поля ввода
+        // «Как только событие с именем "DOMContentLoaded" произойдёт на объекте document, вызови переданную функцию»
         document.addEventListener("DOMContentLoaded", function () {
             for (let i = 1; i <= 5; i++) {
                 let input = document.getElementById("item" + i);

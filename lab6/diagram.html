@@ -17,12 +17,13 @@
       border: 1px solid black;
       display: grid; /* Контейнер превращается в CSS-сетку,где элементы (столбцы) будут размещаться по колонкам. */
       grid-template-columns: repeat(10, 1fr); /* Разбиваем контейнер на 10 равных колонок */
-      align-items: end;
-      justify-content: flex-start;
+      align-items: end; /* Все элементы внутри контейнера (столбцы) будут прижаты к нижнему краю контейнера */
+      justify-content: flex-start; /* Внутри сетки элементы будут располагаться слева направо, начиная с левой стороны */ 
       padding: 0px;
       box-sizing: border-box;
     }
 
+    /* один столбец диаграммы */
     .bar {
       width: 44px;
       height: 120px;
@@ -41,9 +42,9 @@
       let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
       let bars = document.getElementsByClassName('bar');
       let colors = ['red', 'green', 'blue', 'orange', 'purple', 'teal', 'brown', 'pink', 'gold', 'navy'];
-      const diagHeight = document.getElementById('diag').clientHeight;
-      const maxData = Math.max(...data);
-      const k = diagHeight / maxData * 0.9;
+      const diagHeight = document.getElementById('diag').clientHeight; // Получаем высоту контейнера диаграммы в пикселях
+      const maxData = Math.max(...data); // Находим максимальное число в массиве data
+      const k = diagHeight / maxData * 0.9; // Вычисляем масштабный коэффициент k
       for(let i = 0; i < data.length; i++) {
         let height = Math.round(k * data[i]);
         bars[i].style.height = k * data[i] + 'px';

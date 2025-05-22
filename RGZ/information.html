@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segezha Group</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon-16x16.png">
+  <link rel="icon" href="favicon-32x32.png">
+  <style>
+    .content {
+      padding: 100px 20px 40px;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.7;
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00663e;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 1001;
+    }
+    img {
+      max-width: 100%;
+      margin: 20px 0;
+      display: block;
+    }
+    sup a {
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+
+    .hero {
+      background: url('glava.png') center/cover no-repeat;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #fff);
+    }
+
+    header img.logo {
+      height: 110px;
+    }
+
+    .section-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      background: linear-gradient(90deg, #206e35, #57b846);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body id="top">
+
+<header id="header">
+  <img src="icon.png" alt="Segezha Group" class="logo" />
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+</header>
+
+<div class="hero"></div>
+
+<div class="menu-panel" id="menuPanel">
+  <button class="close-button" onclick="toggleMenu()">✖</button>
+  <ul></ul>
+</div>
+
+<div class="content">
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">Как зародилась <em>«бумажная» династия</em></h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p><strong>Александр Котомин</strong> стал одним из первых, кто посвятил всю жизнь Сокольскому комбинату. Его вклад не ограничился технической работой — он стал моральным ориентиром для будущих поколений.</p>
+      <p>Работая сеточником, он управлял ключевыми процессами бумажного производства, от следования технологическим нормам до обеспечения качества конечной продукции. <u>Его труд стал образцом для подражания</u> в профессиональной среде.<sup><a href="https://dzen.ru/a/Yl7ovXb2-wGT2ysH" target="_blank">[1]</a></sup></p>
+    </div>
+  </div>
+  <img src="kotomin.jpg" alt="Александр Котомин" style="width: 40%; max-width: 350px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; margin-left: auto; margin-right: auto;">
+
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">Бумажное дело всей семьи Котоминых</h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p>Потомки Котомина продолжают работать на комбинате, передавая знания и опыт. Это целая система преемственности, где <strong>трудовая этика</strong> передаётся как семейная реликвия.</p>
+      <p><em>Сегодня семейная традиция продолжается уже в пятом поколении</em>, что подтверждает высокую степень вовлечённости и лояльности сотрудников. Семья Котоминых — это не только история, но и живая часть настоящего предприятия.<sup><a href="https://dzen.ru/a/Yl7ovXb2-wGT2ysH" target="_blank">[2]</a></sup></p>
+    </div>
+  </div>
+  <img src="family.jpg" alt="Сыновья" style="max-width:100%; margin-top:20px; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">Как Сокольский комбинат изменил город</h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p>Предприятие повлияло не только на экономику, но и на социальную инфраструктуру города. Были построены <strong>жилые дома, детские сады, спортивные сооружения</strong>, поддерживались культурные мероприятия.</p>
+      <p>Сегодня Сокол — это не просто город на карте России, а <em>центр бумажной индустрии с богатым культурным наследием</em>.<sup><a href="https://dzen.ru/a/Yl7ovXb2-wGT2ysH" target="_blank">[3]</a></sup></p>
+    </div>
+  </div>
+  <img src="sokol.jpg" alt="Комбинат" style="max-width:100%; margin-top:20px; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">История Segezha Group</h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p><strong>Segezha Group</strong> — одна из крупнейших лесопромышленных компаний России. Её история включает десятки приобретений, запусков новых производств и международных проектов.</p>
+      <p>Компания активно инвестирует в модернизацию мощностей и развитие новых направлений, включая <u>экологичную упаковку, домостроение и производство клеёных изделий</u>.<sup><a href="https://ru.wikipedia.org/wiki/Segezha_Group" target="_blank">[4]</a></sup></p>
+    </div>
+  </div>
+  <img src="history.png" alt="История" style="width: 55%; max-width: 500px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; margin-left: auto; margin-right: auto;">
+
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">Производственные мощности</h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p>На сегодняшний день Segezha Group управляет:</p>
+      <ul>
+        <li>Более чем <strong>80 лесозаготовительными участками</strong></li>
+        <li><strong>9 деревообрабатывающими комбинатами</strong> в России</li>
+        <li>Крупнейшим в стране производством <em>крафт-бумаги</em> и <em>бумажных мешков</em></li>
+        <li>Современным домостроительным производством CLT-панелей</li>
+      </ul>
+      <p>Предприятия компании сертифицированы по международным стандартам FSC и PEFC, что подтверждает их <strong>экологическую ответственность</strong>.<sup><a href="https://segezha-group.com/" target="_blank">[5]</a></sup></p>
+    </div>
+  </div>
+  <img src="proizv.png" alt="Мощность" style="width: 55%; max-width: 500px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; margin-left: auto; margin-right: auto;">
+
+  <div class="section-flex">
+    <div style="flex: 1 1 300px;">
+      <h2 class="section-title">Экология и устойчивое развитие</h2>
+    </div>
+    <div style="flex: 2 1 400px;">
+      <p>Segezha Group активно поддерживает принципы устойчивого развития. Компания реализует:</p>
+      <ul>
+        <li>Проекты по <u>восстановлению лесов</u></li>
+        <li>Программы по <strong>снижению выбросов</strong> и переработке отходов</li>
+        <li>Сотрудничество с <em>WWF России</em> и <em>Глобальным договором ООН</em></li>
+      </ul>
+      <p>В 2021 году Segezha Group подписала соглашение с WWF о сохранении 600 000 га лесов в Архангельской области. Также компания занимает устойчивые позиции в международных экологических рейтингах.<sup><a href="https://segezha-group.com/" target="_blank">[6]</a></sup></p>
+    </div>
+  </div>
+  <img src="eco.png" alt="Экология" style="width: 55%; max-width: 500px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; margin-left: auto; margin-right: auto;">
+</div>
+
+<a href="#top" class="scroll-top">Наверх ↑</a>
+
+<footer>
+  Segezha Group. Copyright &copy; 2025
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  const menuPanel = document.getElementById('menuPanel');
+
+  function toggleMenu() {
+    menuPanel.classList.toggle('active');
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>

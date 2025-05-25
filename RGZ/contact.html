@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segezha Group</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon-16x16.png">
+  <link rel="icon" href="favicon-32x32.png">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      padding: 100px 20px 40px;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.7;
+      flex: 1;
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00663e;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 1001;
+    }
+    header img.logo {
+      height: 110px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      margin-top: auto;
+    }
+    .hero {
+      height: 1px;
+      overflow: hidden;
+    }
+    .contacts h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #00663e;
+    }
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      max-width: 400px;
+      flex: 1 1 300px;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-body h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #00663e;
+    }
+    .card-body p {
+      margin: 5px 0;
+    }
+    .card-body a {
+      color: #00663e;
+      text-decoration: none;
+    }
+    .card-body a:hover {
+      text-decoration: underline;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body id="top">
+
+<header id="header">
+  <img src="icon.png" alt="Segezha Group" class="logo" />
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+</header>
+
+<div class="hero"></div>
+
+<div class="menu-panel" id="menuPanel">
+  <button class="close-button" onclick="toggleMenu()">✖</button>
+  <ul>
+    <li><a href="information.html">Информация</a></li>
+    <li><a href="news.html">Новости</a></li>
+    <li><a href="currency.html">Курс валют</a></li>
+    <li><a href="contact.html">Контактные данные</a></li>
+  </ul>
+</div>
+
+<div class="content contacts">
+  <h2>Наши офисы</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="moscow.jpg" alt="Офис в Москве">
+      <div class="card-body">
+        <h3>Офис в Москве</h3>
+        <p><strong>Адрес</strong><br>123112, Россия, г. Москва,<br>Пресненская набережная, д. 10, блок С</p>
+        <p><strong>Телефон:</strong><br><a href="tel:+74999628200">+7 (499) 962 82 00</a></p>
+        <p><strong>E-mail:</strong><br><a href="mailto:welcome@segezha-group.com">welcome@segezha-group.com</a></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="petrozavodsk.jpg" alt="Офис в Петрозаводске">
+      <div class="card-body">
+        <h3>Офис в Петрозаводске</h3>
+        <p><strong>Адрес</strong><br>185035, Россия, г. Петрозаводск,<br>Республика Карелия, проспект Ленина, д.21</p>
+        <p><strong>Телефон:</strong><br><a href="tel:+78142599199">+7 (8142) 599 199</a></p>
+        <p><strong>E-mail:</strong><br><a href="mailto:welcome@segezha-group.com">welcome@segezha-group.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa6d037408a9eb3fce0ecf4dc64d6318577c317d3dfbb5b5e9a5d23eb6937fcd6&amp;source=constructor" allowfullscreen></iframe>
+</div>
+
+<a href="#top" class="scroll-top">Наверх ↑</a>
+
+<footer>
+  Segezha Group. Copyright &copy; 2025
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  const menuPanel = document.getElementById('menuPanel');
+
+  function toggleMenu() {
+    menuPanel.classList.toggle('active');
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+</script>
+
+</body>
+</html>

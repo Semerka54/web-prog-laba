@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segezha Group</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon-16x16.png">
+  <link rel="icon" href="favicon-32x32.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      padding: 100px 20px 40px;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00663e;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 1001;
+    }
+
+    header img.logo {
+      height: 110px;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      margin-top: auto;
+    }
+
+    .hero {
+      height: 1px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body id="top">
+
+<header id="header">
+  <img src="icon.png" alt="Segezha Group" class="logo" />
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
+</header>
+
+<div class="hero"></div>
+
+<div class="menu-panel" id="menuPanel">
+  <button class="close-button" onclick="toggleMenu()">✖</button>
+  <ul>
+    <li><a href="information.html">Информация</a></li>
+    <li><a href="news.html">Новости</a></li>
+    <li><a href="currency.html">Курс валют</a></li>
+  </ul>
+</div>
+
+<div class="content">
+  <h2>Курс австралийского доллара (AUD)</h2>
+  <div id="rateInfo">Загрузка курса...</div>
+
+  <div style="display: flex; gap: 30px; flex-wrap: wrap; margin: 20px 0;">
+    <div>
+      <label>Введите ₽:</label>
+      <input type="number" id="rubInput" step="any" style="width: 120px;">
+      <button onclick="convertToAud()">Рассчитать</button>
+      <div id="rubResult" style="margin-top: 8px; font-weight: bold;"></div>
+    </div>
+    <div>
+      <label>Введите AUD:</label>
+      <input type="number" id="audInput" step="any" style="width: 120px;">
+      <button onclick="convertToRub()">Рассчитать</button>
+      <div id="audResult" style="margin-top: 8px; font-weight: bold;"></div>
+    </div>
+  </div>
+
+  <canvas id="chart" style="max-width: 100%; height: 300px; display: none;"></canvas>
+  <div id="selectedInfo" style="margin-top: 10px; font-weight: bold;"></div>
+</div>
+
+<a href="#top" class="scroll-top">Наверх ↑</a>
+
+<footer>
+  Segezha Group. Copyright &copy; 2025
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  const menuPanel = document.getElementById('menuPanel');
+
+  function toggleMenu() {
+    menuPanel.classList.toggle('active');
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  let currentRate = 0;
+  let chartInstance;
+
+  async function fetchCurrentRate() {
+    const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+    const data = await res.json();
+    currentRate = data.Valute.AUD.Value;
+    document.getElementById('rateInfo').innerText =
+      `Текущий курс: 1 AUD = ${currentRate.toFixed(4)} RUB`;
+  }
+
+  function convertToAud() {
+    const rub = parseFloat(document.getElementById('rubInput').value);
+    const out = isNaN(rub) ? 'Введите сумму в рублях' : `${(rub / currentRate).toFixed(4)} AUD`;
+    document.getElementById('rubResult').innerText = out;
+  }
+
+  function convertToRub() {
+    const aud = parseFloat(document.getElementById('audInput').value);
+    const out = isNaN(aud) ? 'Введите сумму в AUD' : `${(aud * currentRate).toFixed(4)} RUB`;
+    document.getElementById('audResult').innerText = out;
+  }
+
+  async function drawChart() {
+    const ctx = document.getElementById('chart').getContext('2d');
+    const today = new Date();
+    const days = 60;
+    const labels = [];
+    const values = [];
+
+    for (let i = days; i >= 1; i--) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const url = `https://www.cbr-xml-daily.ru/archive/${yyyy}/${mm}/${dd}/daily_json.js`;
+
+      try {
+        const data = await fetch(url).then(r => r.json());
+        labels.push(`${dd}.${mm}`);
+        values.push(data.Valute.AUD.Value);
+      } catch {
+        labels.push(`${dd}.${mm}`);
+        values.push(null);
+      }
+    }
+
+    if (chartInstance) chartInstance.destroy();
+    document.getElementById('chart').style.display = 'block';
+
+    chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Курс AUD (₽)',
+          data: values,
+          backgroundColor: values.map(() => 'rgba(54, 162, 235, 0.6)')
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Курс AUD за последний месяц' }
+        },
+        onClick: (e, elems) => {
+          if (elems.length) {
+            const i = elems[0].index;
+            document.getElementById('selectedInfo').innerText =
+              `Дата: ${labels[i]}, Курс: ${values[i]?.toFixed(4)} ₽`;
+            chartInstance.data.datasets[0].backgroundColor = values.map((_, j) =>
+              j === i ? 'rgba(255, 99, 132, 0.8)' : 'rgba(54, 162, 235, 0.6)'
+            );
+            chartInstance.update();
+          }
+        },
+        scales: {
+          y: {
+            title: { display: true, text: '₽' }
+          }
+        }
+      }
+    });
+  }
+
+  fetchCurrentRate();
+  drawChart();
+</script>
+
+</body>
+</html>

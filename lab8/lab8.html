@@ -17,7 +17,7 @@
             color: black;
             font-family: 'Times New Roman', Times, serif;
             padding: 20px;
-            padding-bottom: 120px; /* добавит пространство, только если нужно */
+            padding-bottom: 120px;
             margin: 0;
         }
     </style>
@@ -49,13 +49,21 @@
             <div class="card-body">
                 <h2 class="card-title">Цветы</h2>
                 <ul class="list-group">
-                    <li v-for="(flower, id) in flowers" class="list-group-item">
+                    <li v-for="(flower, id) in flowers" class="list-group-item d-flex justify-content-between align-items-center">
                         {{ flower }}
-                        <button @click="edit(id, flower)" class="btn btn-outline-secondary btn-sm float-end">
-                            <i class="bi bi-pencil"></i>
-                        </button>
+                        <div>
+                            <button @click="edit(id, flower)" class="btn btn-outline-secondary btn-sm me-1">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button @click="remove(id)" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
                     </li>
                 </ul>
+                <button @click="addFlower" class="btn btn-outline-success btn-sm mt-3">
+                    <i class="bi bi-plus"></i> Добавить цветок
+                </button>
             </div>
         </div>
         <hr>
@@ -66,6 +74,7 @@
                 <tr>
                     <th>Название</th>
                     <th>Редактировать</th>
+                    <th>Удалить</th>
                 </tr>
             </thead>
             <tr v-for="(flower, id) in flowers">
@@ -79,8 +88,16 @@
                     </button>
                     <div class="spinner-border spinner-border-sm" role="status" v-if="flower == null"></div>
                 </td>
+                <td>
+                    <button @click="remove(id)" class="btn btn-danger btn-sm" v-if="flower !== null">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
             </tr>
         </table>
+        <button @click="addFlower" class="btn btn-outline-success btn-sm">
+            <i class="bi bi-plus"></i> Добавить цветок
+        </button>
         <hr>
 
         <h2>Калькулятор</h2>
@@ -95,8 +112,8 @@
                 <input type="number" v-model="b" class="form-control">
             </div>
             <div class="col-auto">
-                <button @click="sum" class="btn btn-primary">=
-                    <i class="bi bi-equals"></i>
+                <button @click="sum" class="btn btn-primary">
+                    = <i class="bi bi-equals"></i>
                 </button>
             </div>
             <div class="col-auto">
@@ -141,6 +158,13 @@
                 setTimeout(() => {
                     this.flowers[id] = newName;
                 }, 3000);
+            },
+            remove(id) {
+                this.flowers.splice(id, 1);
+            },
+            addFlower() {
+                let name = prompt('Введите новый цветок');
+                if (name) this.flowers.push(name);
             },
             sum() {
                 this.result = Number(this.a) + Number(this.b);

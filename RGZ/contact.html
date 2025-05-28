@@ -8,6 +8,9 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="favicon-16x16.png">
   <link rel="icon" href="favicon-32x32.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Подключение Яндекс.Карт API -->
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
   <style>
     html, body {
       height: 100%;
@@ -90,10 +93,10 @@
     .card-body a:hover {
       text-decoration: underline;
     }
-    iframe {
+    /* Контейнер карты */
+    #map {
       width: 100%;
       height: 500px;
-      border: none;
       margin-top: 40px;
     }
   </style>
@@ -141,7 +144,8 @@
     </div>
   </div>
 
-  <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa6d037408a9eb3fce0ecf4dc64d6318577c317d3dfbb5b5e9a5d23eb6937fcd6&amp;source=constructor" allowfullscreen></iframe>
+  <!-- Контейнер для карты вместо iframe -->
+  <div id="map"></div>
 </div>
 
 <a href="#top" class="scroll-top">Наверх ↑</a>
@@ -165,6 +169,27 @@
       header.classList.remove('scrolled');
     }
   });
+
+  // Инициализация Яндекс.Карты
+  ymaps.ready(init);
+  function init() {
+    var map = new ymaps.Map("map", {
+      center: [55.751574, 37.573856], // Москва
+      zoom: 10,
+      controls: ['zoomControl', 'fullscreenControl']
+    });
+
+    var moscowPlacemark = new ymaps.Placemark([55.751574, 37.573856], {
+      balloonContent: 'Офис в Москве<br>Пресненская набережная, д. 10, блок С'
+    });
+
+    var petrozavodskPlacemark = new ymaps.Placemark([61.784441, 34.346895], {
+      balloonContent: 'Офис в Петрозаводске<br>Проспект Ленина, д. 21'
+    });
+
+    map.geoObjects.add(moscowPlacemark);
+    map.geoObjects.add(petrozavodskPlacemark);
+  }
 </script>
 
 </body>

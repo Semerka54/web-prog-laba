@@ -86,7 +86,7 @@
       margin: 0 auto;
     }
 
-    .video-container iframe {
+    #player {
       position: absolute;
       top: 0;
       left: 0;
@@ -132,12 +132,8 @@
   </div>
 
   <div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/Dmvnqj0phFM" 
-      title="Segezha Group"
-      allowfullscreen 
-      loading="lazy">
-    </iframe>
+    <!-- Вместо iframe добавляем контейнер для плеера -->
+    <div id="player"></div>
   </div>
 
   <div class="description">
@@ -169,6 +165,23 @@
       header.classList.remove('scrolled');
     }
   });
+</script>
+
+<!-- YouTube IFrame Player API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  // Создаём YouTube плеер
+  let player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'Dmvnqj0phFM',
+      playerVars: {
+        'autoplay': 0,
+        'controls': 1,
+        'rel': 0
+      }
+    });
+  }
 </script>
 
 </body>

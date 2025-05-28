@@ -55,6 +55,58 @@
       height: 1px;
       overflow: hidden;
     }
+
+    #currencyTitle {
+      background: linear-gradient(90deg, #2e7d32, #66bb6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .exchange-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 20px 0;
+      background: #f3f3f3;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .exchange-block input {
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .exchange-block button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: #2e7d32;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .exchange-block button:hover {
+      background: #1b5e20;
+    }
+
+    .exchange-block div {
+      margin-bottom: 10px;
+    }
+
+    #rateInfo {
+      margin-top: 10px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #2e7d32, #66bb6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   </style>
 </head>
 <body id="top">
@@ -78,21 +130,21 @@
 </div>
 
 <div class="content">
-  <h2>Курс австралийского доллара (AUD)</h2>
+  <h2 id="currencyTitle">Курс белорусского рубля (BYN)</h2>
   <div id="rateInfo">Загрузка курса...</div>
 
-  <div style="display: flex; gap: 30px; flex-wrap: wrap; margin: 20px 0;">
+  <div class="exchange-block">
     <div>
       <label>Введите ₽:</label>
-      <input type="number" id="rubInput" step="any" style="width: 120px;">
-      <button onclick="convertToAud()">Рассчитать</button>
+      <input type="number" id="rubInput" step="any" min="0" style="width: 120px;">
+      <button onclick="convertToByn()">Рассчитать</button>
       <div id="rubResult" style="margin-top: 8px; font-weight: bold;"></div>
     </div>
     <div>
-      <label>Введите AUD:</label>
-      <input type="number" id="audInput" step="any" style="width: 120px;">
+      <label>Введите BYN:</label>
+      <input type="number" id="bynInput" step="any" min="0" style="width: 120px;">
       <button onclick="convertToRub()">Рассчитать</button>
-      <div id="audResult" style="margin-top: 8px; font-weight: bold;"></div>
+      <div id="bynResult" style="margin-top: 8px; font-weight: bold;"></div>
     </div>
   </div>
 
@@ -128,21 +180,29 @@
   async function fetchCurrentRate() {
     const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
     const data = await res.json();
-    currentRate = data.Valute.AUD.Value;
+    currentRate = data.Valute.BYN.Value;
     document.getElementById('rateInfo').innerText =
-      `Текущий курс: 1 AUD = ${currentRate.toFixed(4)} RUB`;
+      `Текущий курс: 1 BYN = ${currentRate.toFixed(4)} RUB`;
   }
 
-  function convertToAud() {
+  function convertToByn() {
     const rub = parseFloat(document.getElementById('rubInput').value);
-    const out = isNaN(rub) ? 'Введите сумму в рублях' : `${(rub / currentRate).toFixed(4)} AUD`;
+    if (isNaN(rub) || rub < 0) {
+      document.getElementById('rubResult').innerText = 'Введите положительное число';
+      return;
+    }
+    const out = `${(rub / currentRate).toFixed(4)} BYN`;
     document.getElementById('rubResult').innerText = out;
   }
 
   function convertToRub() {
-    const aud = parseFloat(document.getElementById('audInput').value);
-    const out = isNaN(aud) ? 'Введите сумму в AUD' : `${(aud * currentRate).toFixed(4)} RUB`;
-    document.getElementById('audResult').innerText = out;
+    const byn = parseFloat(document.getElementById('bynInput').value);
+    if (isNaN(byn) || byn < 0) {
+      document.getElementById('bynResult').innerText = 'Введите положительное число';
+      return;
+    }
+    const out = `${(byn * currentRate).toFixed(4)} RUB`;
+    document.getElementById('bynResult').innerText = out;
   }
 
   async function drawChart() {
@@ -163,7 +223,11 @@
       try {
         const data = await fetch(url).then(r => r.json());
         labels.push(`${dd}.${mm}`);
-        values.push(data.Valute.AUD.Value);
+        if (data.Valute && data.Valute.BYN && typeof data.Valute.BYN.Value === 'number') {
+          values.push(data.Valute.BYN.Value);
+        } else {
+          values.push(null);
+        }
       } catch {
         labels.push(`${dd}.${mm}`);
         values.push(null);
@@ -178,24 +242,30 @@
       data: {
         labels: labels,
         datasets: [{
-          label: 'Курс AUD (₽)',
+          label: 'Курс BYN (₽)',
           data: values,
-          backgroundColor: values.map(() => 'rgba(54, 162, 235, 0.6)')
+          backgroundColor: values.map(v =>
+            v == null ? 'rgba(0,0,0,0)' : 'rgba(54, 162, 235, 0.6)'
+          )
         }]
       },
       options: {
         responsive: true,
         plugins: {
           legend: { display: false },
-          title: { display: true, text: 'Курс AUD за последний месяц' }
+          title: { display: true, text: 'Курс BYN за последний месяц' }
         },
         onClick: (e, elems) => {
           if (elems.length) {
             const i = elems[0].index;
+            const val = values[i];
             document.getElementById('selectedInfo').innerText =
-              `Дата: ${labels[i]}, Курс: ${values[i]?.toFixed(4)} ₽`;
-            chartInstance.data.datasets[0].backgroundColor = values.map((_, j) =>
-              j === i ? 'rgba(255, 99, 132, 0.8)' : 'rgba(54, 162, 235, 0.6)'
+              val != null
+                ? `Дата: ${labels[i]}, Курс: ${val.toFixed(4)} ₽`
+                : `Дата: ${labels[i]}, данные отсутствуют`;
+            chartInstance.data.datasets[0].backgroundColor = values.map((v, j) =>
+              j === i ? 'rgba(255, 99, 132, 0.8)' :
+              v == null ? 'rgba(0,0,0,0)' : 'rgba(54, 162, 235, 0.6)'
             );
             chartInstance.update();
           }
